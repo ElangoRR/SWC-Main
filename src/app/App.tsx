@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, Phone, Mail, MapPin, Instagram, Youtube, MessageCircle, Droplet, Sparkles, Wind, Waves, Palette, Droplets } from 'lucide-react';
+import { Menu, X, Phone, Mail, MapPin, Instagram, Youtube, MessageCircle, Droplet, Sparkles, Wind, Waves, Palette, Droplets, BadgeCheck } from 'lucide-react';
 import { Button } from './components/ui/button';
 import { Input } from './components/ui/input';
 import { Textarea } from './components/ui/textarea';
@@ -9,25 +9,13 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
 
-  const services = [
-    { icon: Droplet, title: 'Knoting Style', description: 'Premium knotting techniques for unique tie-dye patterns' },
-    { icon: Waves, title: 'Dipping Style', description: 'Traditional dipping methods for vibrant color blends' },
-    { icon: Sparkles, title: 'Cloud Style', description: 'Soft, cloud-like patterns with smooth transitions' },
-    { icon: Wind, title: 'Combine Style', description: 'Mixed techniques for complex custom designs' },
-    { icon: Palette, title: 'Acid Wash', description: 'Classic acid wash finish for vintage appeal' },
-    { icon: Sparkles, title: 'Optic Wash', description: 'Optical brightening for enhanced white tones' },
-    { icon: Droplets, title: 'Pigment Wash', description: 'Rich pigment application for bold colors' },
-    { icon: Droplet, title: 'Cold Pigment', description: 'Cold pigment dyeing for fabric preservation' },
-    { icon: Wind, title: 'Spray Wash', description: 'Precision spray techniques for gradient effects' }
-  ];
-
-  const galleryImages = [
-    { id: 1, alt: 'Tie-dye sample 1' },
-    { id: 2, alt: 'Tie-dye sample 2' },
-    { id: 3, alt: 'Tie-dye sample 3' },
-    { id: 4, alt: 'Tie-dye sample 4' },
-    { id: 5, alt: 'Tie-dye sample 5' },
-    { id: 6, alt: 'Tie-dye sample 6' }
+  const stylesAndWork = [
+    { id: 1, title: 'Knoting Style', description: 'Premium knotting techniques for unique tie-dye patterns', alt: 'Tie-dye sample 1' },
+    { id: 2, title: 'Dipping Style', description: 'Traditional dipping methods for vibrant color blends', alt: 'Tie-dye sample 2' },
+    { id: 3, title: 'Cloud Style', description: 'Soft, cloud-like patterns with smooth transitions', alt: 'Tie-dye sample 3' },
+    { id: 4, title: 'Famous Sungudi Saree', description: 'The original format using fine knots to block out circular patterns across the saree body.', alt: 'Tie-dye sample 4' },
+    { id: 5, title: 'Acid Wash', description: 'Classic acid wash finish for vintage appeal', alt: 'Tie-dye sample 5' },
+    { id: 6, title: 'Optic Wash', description: 'Optical brightening for enhanced white tones', alt: 'Tie-dye sample 6' }
   ];
 
   const clients = ['Brand A', 'Brand B', 'Brand C', 'Brand D', 'Brand E'];
@@ -120,9 +108,10 @@ export default function App() {
             <h1 className="uppercase tracking-tight mb-6" style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: '1.2' }}>
               Expert Tie & Dye & Washing Solutions in Tiruppur
             </h1>
-            <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              Specialized in Acid Wash, Optic Wash, Pigment Spray & Custom Designs
-            </p>
+            <div className="flex items-center justify-center gap-2 text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+              <BadgeCheck size={28} style={{ color: '#D4AF37' }} />
+              <span>Plant Approved - We use standard dyes and chemicals</span>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 onClick={() => scrollToSection('contact')}
@@ -143,7 +132,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Services / Styles Section */}
+      {/* Combined Styles & Work Section */}
       <section id="styles" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -153,48 +142,27 @@ export default function App() {
             <div className="w-24 h-1 mx-auto" style={{ backgroundColor: '#D4AF37' }}></div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <div
-                  key={index}
-                  className="group p-8 rounded-2xl border-2 border-gray-200 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-xl"
-                >
-                  <div className="mb-4 w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: '#0B0B0B' }}>
-                    <Icon size={32} style={{ color: '#D4AF37' }} />
-                  </div>
-                  <h3 className="uppercase mb-2" style={{ color: '#0B0B0B', fontWeight: 700, fontSize: '1.25rem' }}>
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600">{service.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery / Work Section */}
-      <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#f8f8f8' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="uppercase mb-4" style={{ color: '#0B0B0B', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-              Our Work
-            </h2>
-            <div className="w-24 h-1 mx-auto" style={{ backgroundColor: '#D4AF37' }}></div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((image) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {stylesAndWork.map((item) => (
               <div
-                key={image.id}
-                className="group relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 hover:scale-105 transition-transform duration-300"
+                key={item.id}
+                className="group rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-[#D4AF37] transition-all duration-300 hover:shadow-xl"
               >
-                <div className="absolute inset-0 flex items-center justify-center text-white/80 text-6xl">
-                  <Sparkles size={64} />
+                {/* Image Area */}
+                <div className="relative aspect-square bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Sparkles size={64} className="text-white/80" />
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
                 </div>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
+
+                {/* Description Area */}
+                <div className="p-6">
+                  <h3 className="uppercase mb-2" style={{ color: '#0B0B0B', fontWeight: 700, fontSize: '1.25rem' }}>
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
               </div>
             ))}
           </div>
