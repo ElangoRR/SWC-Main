@@ -40,9 +40,16 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
+  /* SWC Brand Colors */
   --swc-black: #0B0B0B;
   --swc-gold: #D4AF37;
   --swc-white: #FFFFFF;
+
+  /* Premium Neutral Palette */
+  --premium-off-white: #F9F9FB;
+  --premium-charcoal: #1E2229;
+  --premium-light-gray: #E8E8EC;
+  --premium-medium-gray: #7A7A8E;
 }
 
 .dark {

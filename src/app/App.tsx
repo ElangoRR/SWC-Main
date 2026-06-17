@@ -4,6 +4,7 @@ import { Button } from './components/ui/button';
 import { Input } from './components/ui/input';
 import { Textarea } from './components/ui/textarea';
 import logoImage from '../imports/image.png';
+import { imageConfig } from './imageConfig';
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,12 +20,12 @@ export default function App() {
   };
 
   const craftTechniques = [
-    { id: 1, title: 'Knoting Style', description: 'Premium knotting techniques for unique tie-dye patterns' },
-    { id: 2, title: 'Dipping Style', description: 'Traditional dipping methods for vibrant color blends' },
-    { id: 3, title: 'Cloud Style', description: 'Soft, cloud-like patterns with smooth transitions' },
-    { id: 4, title: 'Famous Sungudi Saree', description: 'The original format using fine knots to block out circular patterns across the saree body.' },
-    { id: 5, title: 'Acid Wash', description: 'Classic acid wash finish for vintage appeal' },
-    { id: 6, title: 'Optic Wash', description: 'Optical brightening for enhanced white tones' }
+    { id: 1, title: 'Knoting Style', description: 'Premium knotting techniques for unique tie-dye patterns', image: imageConfig.knotingStyle.primaryImage },
+    { id: 2, title: 'Dipping Style', description: 'Traditional dipping methods for vibrant color blends', image: imageConfig.dippingStyle.primaryImage },
+    { id: 3, title: 'Cloud Style', description: 'Soft, cloud-like patterns with smooth transitions', image: imageConfig.cloudStyle.primaryImage },
+    { id: 4, title: 'Famous Sungudi Saree', description: 'The original format using fine knots to block out circular patterns across the saree body.', image: null },
+    { id: 5, title: 'Acid Wash', description: 'Classic acid wash finish for vintage appeal', image: null },
+    { id: 6, title: 'Optic Wash', description: 'Optical brightening for enhanced white tones', image: null }
   ];
 
   const b2bCapabilities = [
@@ -167,11 +168,19 @@ export default function App() {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
                 }}
               >
-                {/* Image Placeholder */}
+                {/* Image Container */}
                 <div className="relative aspect-square bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-10">
-                    ◆
-                  </div>
+                  {item.image ? (
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-10">
+                      ◆
+                    </div>
+                  )}
                 </div>
 
                 {/* Description */}
