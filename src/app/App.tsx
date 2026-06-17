@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu, X, Phone, Mail, MapPin, Instagram, Youtube, MessageCircle, BadgeCheck, Leaf, Zap, Users, Award } from 'lucide-react';
 import { Button } from './components/ui/button';
 import { Input } from './components/ui/input';
@@ -10,6 +10,27 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
 
+  // Rotating craft images (every 12 seconds)
+  const ROTATE_INTERVAL_MS = 12000;
+  const [cloudIndex, setCloudIndex] = useState(0);
+  const [dippingIndex, setDippingIndex] = useState(0);
+  const [knottingIndex, setKnottingIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setCloudIndex((i) => (i + 1) % imageConfig.cloudStyle.images.length);
+      setDippingIndex((i) => (i + 1) % imageConfig.dippingStyle.images.length);
+      setKnottingIndex((i) => {
+        const len = imageConfig.knotingStyle.images.length;
+        return (i + 1) % len;
+      });
+
+    }, ROTATE_INTERVAL_MS);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+
   // Color Palette
   const colors = {
     offWhite: '#F9F9FB',
@@ -20,13 +41,29 @@ export default function App() {
   };
 
   const craftTechniques = [
-    { id: 1, title: 'Knoting Style', description: 'Premium knotting techniques for unique tie-dye patterns', image: imageConfig.knotingStyle.primaryImage },
-    { id: 2, title: 'Dipping Style', description: 'Traditional dipping methods for vibrant color blends', image: imageConfig.dippingStyle.primaryImage },
-    { id: 3, title: 'Cloud Style', description: 'Soft, cloud-like patterns with smooth transitions', image: imageConfig.cloudStyle.primaryImage },
+    {
+      id: 1,
+      title: 'Knoting Style',
+      description: 'Premium knotting techniques for unique tie-dye patterns',
+      image: imageConfig.knotingStyle.images[knottingIndex],
+    },
+    {
+      id: 2,
+      title: 'Dipping Style',
+      description: 'Traditional dipping methods for vibrant color blends',
+      image: imageConfig.dippingStyle.images[dippingIndex],
+    },
+    {
+      id: 3,
+      title: 'Cloud Style',
+      description: 'Soft, cloud-like patterns with smooth transitions',
+      image: imageConfig.cloudStyle.images[cloudIndex],
+    },
     { id: 4, title: 'Famous Sungudi Saree', description: 'The original format using fine knots to block out circular patterns across the saree body.', image: null },
     { id: 5, title: 'Acid Wash', description: 'Classic acid wash finish for vintage appeal', image: null },
     { id: 6, title: 'Optic Wash', description: 'Optical brightening for enhanced white tones', image: null }
   ];
+
 
   const b2bCapabilities = [
     { title: 'Bulk Orders', description: 'Handle large-scale orders with consistent quality', icon: Users },
